@@ -22,8 +22,10 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
 
                 dataCards.forEach(data => data.myid = dataUser._id)
                 setCards(dataCards)
-            });
+            })
+            .catch((error) => console.error(`Ошибка при создании начальных данных страницы ${error}`))
     }, [])
+
 
     return (
         <main className="main">

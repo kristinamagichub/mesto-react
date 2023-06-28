@@ -11,15 +11,14 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
-  const [selectedCard, setSelectedCard] = useState({})
-  const [isImagePopup, setImagePopup] = useState(false)
+  const [selectedCard, setSelectedCard] = useState(null)
 
 
   function closeAllPopups() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
-    setImagePopup(false)
+    setSelectedCard(null)
   }
 
   function handleEditProfileClick() {
@@ -38,7 +37,6 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card)
-    setImagePopup(true)
   }
 
 
@@ -156,7 +154,7 @@ function App() {
         titleButton="Да"
       />
 
-      <ImagePopup card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups} />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
     </div>
   );
