@@ -20,12 +20,14 @@
 @import url(./blocks/group/group.css);
 @import url(./blocks/group/__mask/group__mask.css);
 @import url(./blocks/group/__description/group__description.css);
+@import url(./blocks/group/__element/group__element.css);
 @import url(./blocks/group/__picture-name/group__picture-name.css);
 @import url(./blocks/group/__rectangle/group__rectangle.css);
 @import url(./blocks/group/__like/group__like.css);
 @import url(./blocks/group/__like/_active/group__like_active.css);
 @import url(./blocks/group/__likes-counter/group__likes-counter.css);
 @import url(./blocks/group/__trash/group__trash.css);
+
 
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);

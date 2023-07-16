@@ -11,6 +11,7 @@
   background-color: transparent;
   cursor: pointer;
   transition: opacity 1s linear;
+  z-index: 1;
 }
 
 .group__trash:hover {

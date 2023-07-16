@@ -17,6 +17,10 @@
   opacity: 0.8;
 }
 
+.popup__button-save:disabled {
+  opacity: 0.4;
+}
+
 @media screen and (min-width: 1280px) {
   .popup__button-save {
     margin: 18px 36px 37px;

@@ -15,3 +15,7 @@
 .popup__input:first-child {
   margin-top: 0;
 }
+
+.popup__input_invalid {
+  border-bottom: 1px solid rgba(255, 0, 0, .4);
+}

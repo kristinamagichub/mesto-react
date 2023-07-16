@@ -1,44 +1,28 @@
 //функционалбный компонент для блока Main
 
-import { useEffect, useState } from "react"
-import api from "../../utils/api.js"
+import { memo, useContext } from "react"
+
 import Card from "../Card/Card.jsx"
+import CurrentUserContext from "../../contexts/CurrentUserContext.js"
 
 
-export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
-    const [userName, setUserName] = useState(' ')
-    const [userDescription, setUserDescription] = useState(' ')
-    const [userAvatar, setUserAvatar] = useState(' ')
+const Main = memo(({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDelete, cards, onCardLike }) => {
+    const currentUser = useContext(CurrentUserContext)
 
-    const [cards, setCards] = useState([]) //cards -массив карточек
-
-
-    useEffect(() => {
-        Promise.all([api.getInfo(), api.getCards()])//получает на вход масив из асихронных методов, он выполняет их параллельно
-            .then(([dataUser, dataCards]) => {
-                setUserName(dataUser.name)
-                setUserDescription(dataUser.about)
-                setUserAvatar(dataUser.avatar)
-
-                dataCards.forEach(data => data.myid = dataUser._id)
-                setCards(dataCards)
-            })
-            .catch((error) => console.error(`Ошибка при создании начальных данных страницы ${error}`))
-    }, [])
 
 
     return (
         <main className="main">
             <section className="profile">
                 <button className="profile__avatar-overlay" type="button" onClick={onEditAvatar}>
-                    <img className="profile__image" src={userAvatar} alt="фотография профиля" />
+                    <img className="profile__image" src={currentUser.avatar ? currentUser.avatar : "#"} alt="фотография профиля" />
                 </button>
                 <div className="profile__info">
                     <div className="profile__title-space">
-                        <h1 className="profile__name" >{userName}</h1>
+                        <h1 className="profile__name" >{currentUser.name ? currentUser.name : " "}</h1>
                         <button className="profile__edit-button" type="button" onClick={onEditProfile} />
                     </div>
-                    <p className="profile__job">{userDescription}</p>
+                    <p className="profile__job">{currentUser.about ? currentUser.about : " "}</p>
                 </div>
                 <button className="profile__add-button" type="button" onClick={onAddPlace} />
             </section>
@@ -48,7 +32,7 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
                         return (
 
                             <li className="group__item" key={data._id} >
-                                <Card card={data} onCardClick={onCardClick} />
+                                <Card card={data} onCardClick={onCardClick} onCardLike={onCardLike} onDelete={onDelete} />
                             </li>
                         )
                     })}
@@ -56,4 +40,6 @@ export default function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardCl
             </section>
         </main>
     )
-};
+})
+
+export default Main

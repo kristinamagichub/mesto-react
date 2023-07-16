@@ -1,9 +1,18 @@
-export default function Card({ card, onCardClick }) {
+
+import { memo, useContext } from "react"
+import CurrentUserContext from "../../contexts/CurrentUserContext.js"
+import LikeButton from "../LikeButton/LikeButton.jsx"
+
+const Card = memo(({ card, onCardClick, onDelete, onCardLike }) => {
+    const currentUser = useContext(CurrentUserContext)
     return (
 
         <article className="group__element">
+
+            {currentUser._id === card.owner._id && <button className="group__trash" type="button" onClick={() => onDelete(card._id)} />}
+
             <div className="group__rectangle">
-                <button className="group__trash" type="button" />
+
                 <img className="group__mask"
                     src={card.link}
                     alt={`Фотография ${card.name}`}
@@ -11,12 +20,14 @@ export default function Card({ card, onCardClick }) {
                 <div className="group__description">
                     <h2 className="group__picture-name">{card.name}</h2>
                     <div>
-                        <button className="group__like" type="button" />
-                        <div className="group__likes-counter" />
+                        <LikeButton myid={currentUser._id} card={card} onCardLike={onCardLike} />
+
                     </div>
                 </div>
             </div>
         </article>
 
     )
-}
+})
+
+export default Card
