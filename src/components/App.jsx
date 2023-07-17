@@ -216,7 +216,7 @@ function App() {
           isOpen={isDeleteImagePopupOpen}
           onClose={closeAllPopups}
           onSubmit={handleDeleteSubmit}
-          isValid={true}
+          isValid
         />
 
         <ImagePopup card={selectedCard} isOpen={isImagePopup} onClose={closeAllPopups} />
